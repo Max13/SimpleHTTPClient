@@ -16,12 +16,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QString>
-
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-
-bool setURL()
+#include "httpmanager.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -32,9 +27,7 @@ int main(int argc, char *argv[])
     QLineEdit *urlbox;
     QPushButton *submit;
 
-    QNetworkAccessManager *netManager;
-    QNetworkRequest *netRequest;
-    QNetworkReply *netReply;
+    httpManager httpClient;
 
     w = new QMainWindow;
     widget = new QWidget(w);
@@ -42,15 +35,12 @@ int main(int argc, char *argv[])
     urlbox = new QLineEdit(w);
     submit = new QPushButton("Submit", w);
 
-    netManager = new QNetworkAccessManager;
-    netRequest = new QNetworkRequest;
-
     flayout->addRow("URL", urlbox);
     flayout->addRow(submit);
     widget->setLayout(flayout);
     w->setCentralWidget(widget);
 
-    QObject::connect(submit, SIGNAL(clicked()), netRequest, SLOT())
+    QObject::connect(submit, SIGNAL(clicked()), &httpClient, SLOT(setUrl(QUrl)))
 
     w->show();
     
