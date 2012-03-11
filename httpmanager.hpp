@@ -1,5 +1,5 @@
 //
-// main.cpp for SimpleHTTPClient in /Users/Max13/Developpement
+// httpmanager.hpp for SimpleHTTPClient in /Users/Max13/Developpement
 //
 // Made by Adnan RIHAN
 // Login   <adnan@rihan.fr>
@@ -11,29 +11,31 @@
 #ifndef HTTPMANAGER_HPP
 #define HTTPMANAGER_HPP
 
+#include <QBuffer>
+#include <QDebug>
+#include <QObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QUrl>
 
-class httpManager
+class HttpManager : public QObject
 {
+    Q_OBJECT
+
     private:
         QNetworkAccessManager *netManager;
         QNetworkRequest *netRequest;
-        QNetworkReply *netReply;
 
     public:
-        httpManager(QObject *parent = 0);
-        ~httpManager();
+        HttpManager(QObject *parent = 0);
+        ~HttpManager();
         QNetworkAccessManager* getNetManager() const {return (this->netManager);}
         QNetworkRequest* getNetRequest() const {return (this->netRequest);}
-        QNetworkReply* getNetReply() const {return (this->netReply);}
+        void proceedRequest(QString method, QUrl url, QByteArray body = QByteArray());
     
     signals:
-    
+
     public slots:
-        void setUrl(QUrl const url) {this->netRequest->setUrl(url);}
 };
 
 #endif // HTTPMANAGER_HPP

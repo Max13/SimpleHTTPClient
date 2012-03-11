@@ -11,7 +11,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    httpmanager.cpp
+    httpmanager.cpp \
+    mainwindow.cpp
 
 HEADERS += \
-    httpmanager.hpp
+    httpmanager.hpp \
+    mainwindow.hpp

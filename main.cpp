@@ -10,39 +10,15 @@
 
 #include <QDebug>
 #include <QtGui/QApplication>
-#include <QMainWindow>
-#include <QWidget>
-#include <QFormLayout>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QString>
 #include "httpmanager.hpp"
+#include "mainwindow.hpp"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QMainWindow *w;
-    QWidget *widget;
-    QFormLayout *flayout;
-    QLineEdit *urlbox;
-    QPushButton *submit;
+    MainWindow *mw = new MainWindow;
 
-    httpManager httpClient;
-
-    w = new QMainWindow;
-    widget = new QWidget(w);
-    flayout = new QFormLayout(w);
-    urlbox = new QLineEdit(w);
-    submit = new QPushButton("Submit", w);
-
-    flayout->addRow("URL", urlbox);
-    flayout->addRow(submit);
-    widget->setLayout(flayout);
-    w->setCentralWidget(widget);
-
-    QObject::connect(submit, SIGNAL(clicked()), &httpClient, SLOT(setUrl(QUrl)))
-
-    w->show();
+    mw->show();
     
     return a.exec();
 }
